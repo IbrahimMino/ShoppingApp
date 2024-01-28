@@ -8,9 +8,6 @@ import 'package:shopping/ui/recomended/discounts_installments/discount_page.dart
 import 'package:shopping/ui/recomended/new_item/new_item_page.dart';
 import 'package:shopping/ui/recomended/popular/popular_page.dart';
 import 'package:shopping/ui/utils/Constants.dart';
-import 'package:sizer/sizer.dart';
-
-
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,10 +23,10 @@ class _HomePageState extends State<HomePage>
 
   late TabController _tabController;
   final List<Widget> _tabs = [
-  NewItemPage(),
-  NewItemPage(),
-  NewItemPage(),
-  NewItemPage(),
+    NewItemPage(),
+    NewItemPage(),
+    NewItemPage(),
+    NewItemPage(),
   ];
 
   @override
@@ -52,7 +49,6 @@ class _HomePageState extends State<HomePage>
     var width = mediaQueryData.size.width;
     var height = mediaQueryData.size.height;
     var orientation = mediaQueryData.orientation;
-
 
     return SafeArea(
       child: Scaffold(
@@ -78,8 +74,10 @@ class _HomePageState extends State<HomePage>
                 child: Row(
                   children: [
                     SvgPicture.asset('assets/images/profile.svg'),
-                    SizedBox(width: height/90,),
-                     Text(
+                    SizedBox(
+                      width: 10
+                    ),
+                    Text(
                       'Здравствуйте,',
                       style: TextStyle(
                         fontSize: 16,
@@ -87,7 +85,7 @@ class _HomePageState extends State<HomePage>
                       ),
                     ),
                     SizedBox(width: 10),
-                    const Text(
+                     Text(
                       'Дониёр',
                       style: TextStyle(
                           fontSize: 16,
@@ -100,7 +98,7 @@ class _HomePageState extends State<HomePage>
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  height: 150,
+                  height: 152,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal, // Horizontal scroll
                     itemCount: 3, // Umumiy elementlar soni
@@ -124,7 +122,9 @@ class _HomePageState extends State<HomePage>
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     customEdit(),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     carousel(),
                     SizedBox(height: 10),
                     Container(
@@ -133,20 +133,19 @@ class _HomePageState extends State<HomePage>
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:
-                          const MaterialStatePropertyAll<Color>(
-                              Color(0xffFF7011)),
-                          shape: MaterialStateProperty.all<
-                              RoundedRectangleBorder>(
+                              const MaterialStatePropertyAll<Color>(
+                                  Color(0xffFF7011)),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
                         ),
                         onPressed: () {},
-                        child: const Text(
+                        child:  Text(
                           'Все акции',
-                          style: TextStyle(
-                              color: Colors.white, fontSize: 14),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ),
                     ),
@@ -163,7 +162,9 @@ class _HomePageState extends State<HomePage>
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: height/90,),
+                          SizedBox(
+                            height: height / 90,
+                          ),
                           Text(
                             '22 : 33 : 15',
                             style: TextStyle(
@@ -192,18 +193,19 @@ class _HomePageState extends State<HomePage>
                             activeIndex = index;
                           });
                         },
-                        isSelected:
-                            Constants.recommendProducts.map((e) => e.isActive).toList(),
+                        isSelected: Constants.recommendProducts
+                            .map((e) => e.isActive)
+                            .toList(),
                         children: [
                           Constants.langButton(Constants.recommendProducts[0]),
                           Constants.langButton(Constants.recommendProducts[1]),
                           Constants.langButton(Constants.recommendProducts[2]),
                         ]),
                     Container(
-                      height: height * 3/4,
+                      height: height * 3/ 4,
                       child: Scaffold(
                         appBar: AppBar(
-                          title: const Padding(
+                          title:  Padding(
                             padding: EdgeInsets.symmetric(horizontal: 6),
                             child: Align(
                               alignment: Alignment.centerLeft,
@@ -235,7 +237,7 @@ class _HomePageState extends State<HomePage>
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Align(
@@ -245,33 +247,30 @@ class _HomePageState extends State<HomePage>
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
-                    carouselBlog(width,height),
-                    SizedBox(height: 10),
+                    carouselBlog(width, height),
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 16.0),
                       width: width,
                       child: ElevatedButton(
                         style: ButtonStyle(
                           backgroundColor:
-                          const MaterialStatePropertyAll<Color>(
-                              Color(0xffFF7011)),
-                          shape: MaterialStateProperty.all<
-                              RoundedRectangleBorder>(
+                              const MaterialStatePropertyAll<Color>(
+                                  Color(0xffFF7011)),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
                         ),
                         onPressed: () {},
-                        child: const Text(
+                        child:  Text(
                           'Читать все',
-                          style: TextStyle(
-                              color: Colors.white, fontSize: 14),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 30),
                     catalogItem(),
                     SizedBox(height: 10),
                   ],
@@ -284,52 +283,7 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget carouselBlog(width, height) {
-    return Container(
-      width: 292 ,
-      height: height/6,
-      child: CarouselSlider(
-        items: [1, 2, 3].map((e) {
-          return Container(
-            width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.symmetric(horizontal: 2),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/blog1.png')),
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10)),
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Text(
-                'Топ-20 лучших недорогих планшетов на сегодняшний день',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600),
-              )),
-            ),
-          );
-        }).toList(),
-        options: CarouselOptions(
-          height: height/2,
-          aspectRatio: 16 / 9,
-          viewportFraction: 0.8,
-          initialPage: 0,
-          enableInfiniteScroll: true,
-          reverse: false,
-          autoPlay: true,
-          autoPlayInterval: Duration(seconds: 3),
-          autoPlayAnimationDuration: Duration(milliseconds: 800),
-          autoPlayCurve: Curves.fastOutSlowIn,
-          enlargeCenterPage: true,
-          enlargeFactor: 0.3,
-          scrollDirection: Axis.horizontal,
-        ),
-      ),
-    );
-  }
+
 
   Widget carousel() {
     return Container(
@@ -415,9 +369,10 @@ class _HomePageState extends State<HomePage>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        width: 170,
+                          width: 170,
                           height: 130,
-                          child: Image.asset(Constants.recommendProducts[index].img_url)),
+                          child: Image.asset(
+                              Constants.recommendProducts[index].img_url)),
                     ],
                   ),
                   SizedBox(height: 20),
@@ -508,7 +463,6 @@ class _HomePageState extends State<HomePage>
           child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-            height: 152,
             width: 292,
             child: Padding(
               padding: EdgeInsets.all(10.0),
@@ -545,21 +499,24 @@ class _HomePageState extends State<HomePage>
                         color: Colors.black),
                   ),
                   SizedBox(
-                    height: 7,
+                    height: 10,
                   ),
                   Flexible(
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll<Color>(Color(0xffFF7011)),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8)))),
-                      onPressed: () {},
-                      child: Text(
-                        'Забрать заказ',
-                        style: TextStyle(color: Colors.white, fontSize: 14),
+                    child: Container(
+                      height: 34,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll<Color>(
+                                Color(0xffFF7011)),
+                            shape:
+                                MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8)))),
+                        onPressed: () {},
+                        child: Text(
+                          'Забрать заказ',
+                          style: TextStyle(color: Colors.white, fontSize: 14),
+                        ),
                       ),
                     ),
                   ),
@@ -597,7 +554,7 @@ class _HomePageState extends State<HomePage>
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   color: Colors.white),
-              height:120,
+              height: 120,
               width: 360,
               child: Padding(
                 padding: EdgeInsets.all(10.0),
@@ -624,7 +581,7 @@ class _HomePageState extends State<HomePage>
                     ),
                     Container(
                       width: 180,
-                      height: 28,
+                      height: 30,
                       child: ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor: MaterialStatePropertyAll<Color>(
@@ -634,9 +591,9 @@ class _HomePageState extends State<HomePage>
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8)))),
                         onPressed: () {},
-                        child: const Text(
+                        child:  Text(
                           'Каталог',
-                          style: TextStyle(color: Colors.white, fontSize: 14),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ),
                     ),
@@ -658,5 +615,53 @@ class _HomePageState extends State<HomePage>
       ),
     );
   }
-}
 
+
+  Widget carouselBlog(width, height) {
+    return Container(
+      width: 292,
+      height: 180,
+      color: Colors.transparent,
+      child: CarouselSlider(
+        items: [1, 2, 3].map((e) {
+          return Container(
+            width: MediaQuery.of(context).size.width,
+            margin: EdgeInsets.symmetric(horizontal: 2),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/blog1.png')),
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(10)),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    'Топ-20 лучших недорогих планшетов на сегодняшний день',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  )),
+            ),
+          );
+        }).toList(),
+        options: CarouselOptions(
+          height: 300,
+          aspectRatio: 16 / 9,
+          viewportFraction: 0.8,
+          initialPage: 0,
+          enableInfiniteScroll: true,
+          reverse: false,
+          autoPlay: true,
+          autoPlayInterval: Duration(seconds: 3),
+          autoPlayAnimationDuration: Duration(milliseconds: 800),
+          autoPlayCurve: Curves.fastOutSlowIn,
+          enlargeCenterPage: true,
+          enlargeFactor: 0.3,
+          scrollDirection: Axis.horizontal,
+        ),
+      ),
+    );
+  }
+}

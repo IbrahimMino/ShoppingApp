@@ -24,7 +24,7 @@ class _DashboardPageState extends State<DashboardPage> {
     CatalogPage(),
     BasketPage(),
     FavoritePage(),
-    NewItemPage()
+    ProfilePage()
   ];
 
   @override

@@ -11,13 +11,13 @@ class NewItemPage extends StatefulWidget {
 }
 
 class _NewItemPageState extends State<NewItemPage> {
+  bool showRemainingItems = false;
+
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
-    var size = mediaQueryData.size;
     var width = mediaQueryData.size.width;
     var height = mediaQueryData.size.height;
-    var orientation = mediaQueryData.orientation;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -38,34 +38,36 @@ class _NewItemPageState extends State<NewItemPage> {
                 child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 3,
+                  itemCount: showRemainingItems ? 15 : 3,
                   itemBuilder: (context, index) {
-                    return recomendedItem(index, width,height);
+                    return recomendedItem(index, width, height);
                   },
                 ),
               ),
             ),
-
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 16.0),
               width: width,
               child: ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor:
-                  const MaterialStatePropertyAll<Color>(
-                      Color(0xffFF7011)),
-                  shape: MaterialStateProperty.all<
-                      RoundedRectangleBorder>(
+                      const MaterialStatePropertyAll<Color>(Color(0xffFF7011)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                 ),
-                onPressed: () {},
-                child: const Text(
-                  'Все акции',
-                  style: TextStyle(
-                      color: Colors.white, fontSize: 14),
+                onPressed: () {
+                  setState(() {
+                    showRemainingItems == true
+                        ? showRemainingItems = false
+                        : showRemainingItems = true;
+                  });
+                },
+                child: Text(
+                  showRemainingItems ? 'Скрывать' : 'Смотреть все 15',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),
             ),
@@ -82,7 +84,7 @@ class _NewItemPageState extends State<NewItemPage> {
       children: [
         Container(
           color: Colors.transparent,
-          height: height / 6,
+          height: 132,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(
@@ -92,6 +94,7 @@ class _NewItemPageState extends State<NewItemPage> {
                 children: [
                   SizedBox(
                       height: 81,
+                      width: 91,
                       child: Image.asset(
                           Products.listProducts[index].img_url.toString())),
                   Flexible(
@@ -100,14 +103,16 @@ class _NewItemPageState extends State<NewItemPage> {
                       children: [
                         Text(
                           Products.listProducts[index].name.toString(),
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
                             color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
                           ),
                           softWrap: true,
                         ),
-                        SizedBox(height: height/90,),
+                        SizedBox(
+                          height: height / 90,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -116,7 +121,7 @@ class _NewItemPageState extends State<NewItemPage> {
                               children: [
                                 Text(
                                   Products.listProducts[index].price.toString(),
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.black,
                                     fontWeight: FontWeight.normal,
@@ -127,7 +132,7 @@ class _NewItemPageState extends State<NewItemPage> {
                                 Text(
                                     Products.listProducts[index].sale_price
                                         .toString(),
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 16,
                                       color: Color(0xffFF7011),
                                       fontWeight: FontWeight.bold,
