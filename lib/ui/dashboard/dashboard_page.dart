@@ -6,6 +6,7 @@ import 'package:shopping/ui/catalog/catalog_page.dart';
 import 'package:shopping/ui/favorite/favorite_page.dart';
 import 'package:shopping/ui/home/home_page.dart';
 import 'package:shopping/ui/profile/profile_page.dart';
+import 'package:shopping/ui/recomended/new_item/new_item_page.dart';
 
 
 class DashboardPage extends StatefulWidget {
@@ -23,7 +24,7 @@ class _DashboardPageState extends State<DashboardPage> {
     CatalogPage(),
     BasketPage(),
     FavoritePage(),
-    ProfilePage(),
+    NewItemPage()
   ];
 
   @override

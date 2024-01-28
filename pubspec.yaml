@@ -40,6 +40,7 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   fancy_bottom_navigation: ^0.3.2
   scroll_bottom_navigation_bar: ^4.0.0
+  sizer: ^2.0.15
 
 dev_dependencies:
   flutter_test:

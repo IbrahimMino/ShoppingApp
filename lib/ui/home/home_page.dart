@@ -8,6 +8,9 @@ import 'package:shopping/ui/recomended/discounts_installments/discount_page.dart
 import 'package:shopping/ui/recomended/new_item/new_item_page.dart';
 import 'package:shopping/ui/recomended/popular/popular_page.dart';
 import 'package:shopping/ui/utils/Constants.dart';
+import 'package:sizer/sizer.dart';
+
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,10 +26,10 @@ class _HomePageState extends State<HomePage>
 
   late TabController _tabController;
   final List<Widget> _tabs = [
-    NewItemPage(),
-    PopularPage(),
-    DiscountPage(),
-    BestsellerPage()
+  NewItemPage(),
+  NewItemPage(),
+  NewItemPage(),
+  NewItemPage(),
   ];
 
   @override
@@ -50,6 +53,7 @@ class _HomePageState extends State<HomePage>
     var height = mediaQueryData.size.height;
     var orientation = mediaQueryData.orientation;
 
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xffF0F0F0),
@@ -70,12 +74,12 @@ class _HomePageState extends State<HomePage>
               ),
               SizedBox(height: 10),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     SvgPicture.asset('assets/images/profile.svg'),
-                    SizedBox(width: 10),
-                    Text(
+                    SizedBox(width: height/90,),
+                     Text(
                       'Здравствуйте,',
                       style: TextStyle(
                         fontSize: 16,
@@ -83,7 +87,7 @@ class _HomePageState extends State<HomePage>
                       ),
                     ),
                     SizedBox(width: 10),
-                    Text(
+                    const Text(
                       'Дониёр',
                       style: TextStyle(
                           fontSize: 16,
@@ -96,7 +100,7 @@ class _HomePageState extends State<HomePage>
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  height: 160, // Vertical o'lcham
+                  height: 150,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal, // Horizontal scroll
                     itemCount: 3, // Umumiy elementlar soni
@@ -107,9 +111,7 @@ class _HomePageState extends State<HomePage>
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -122,34 +124,30 @@ class _HomePageState extends State<HomePage>
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     customEdit(),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 10,),
                     carousel(),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStatePropertyAll<Color>(
-                                        Color(0xffFF7011)),
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                              ),
-                              onPressed: () {},
-                              child: const Text(
-                                'Все акции',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 14),
-                              ),
+                    SizedBox(height: 10),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+                      width: width,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                          const MaterialStatePropertyAll<Color>(
+                              Color(0xffFF7011)),
+                          shape: MaterialStateProperty.all<
+                              RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                        ],
+                        ),
+                        onPressed: () {},
+                        child: const Text(
+                          'Все акции',
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 14),
+                        ),
                       ),
                     ),
                     Padding(
@@ -158,16 +156,14 @@ class _HomePageState extends State<HomePage>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: Text(
-                              'Товар дня',
-                              style: TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          Text(
+                            'Товар дня',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(width: 10),
+                          SizedBox(height: height/90,),
                           Text(
                             '22 : 33 : 15',
                             style: TextStyle(
@@ -196,30 +192,27 @@ class _HomePageState extends State<HomePage>
                             activeIndex = index;
                           });
                         },
+                        isSelected:
+                            Constants.recommendProducts.map((e) => e.isActive).toList(),
                         children: [
                           Constants.langButton(Constants.recommendProducts[0]),
                           Constants.langButton(Constants.recommendProducts[1]),
                           Constants.langButton(Constants.recommendProducts[2]),
-                        ],
-                        isSelected:
-                            Constants.recommendProducts.map((e) => e.isActive).toList()),
-                    SizedBox(height: 10),
+                        ]),
                     Container(
-                      height: 680,
+                      height: height * 3/4,
                       child: Scaffold(
                         appBar: AppBar(
                           title: const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 6),
                             child: Align(
                               alignment: Alignment.centerLeft,
-                              child: Expanded(
-                                child: Text(
-                                  'Рекомендуем вам',
-                                  style: TextStyle(
-                                      fontSize: 22,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                              child: Text(
+                                'Рекомендуем вам',
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -228,7 +221,7 @@ class _HomePageState extends State<HomePage>
                             labelColor: Color(0xffFF7011),
                             unselectedLabelColor: Colors.grey,
                             controller: _tabController,
-                            tabs: [
+                            tabs: const [
                               Tab(text: 'Новинки'),
                               Tab(text: 'Популярное'),
                               Tab(text: 'Скидки + Рассрочка'),
@@ -242,7 +235,7 @@ class _HomePageState extends State<HomePage>
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Align(
@@ -253,40 +246,34 @@ class _HomePageState extends State<HomePage>
                       ),
                     ),
                     SizedBox(height: 20),
-                    carouselBlog(),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStatePropertyAll<Color>(
-                                        Color(0xffFF7011)),
-                                shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                              ),
-                              onPressed: () {},
-                              child: Expanded(
-                                child: Text(
-                                  'Читать все',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 14),
-                                ),
-                              ),
+                    carouselBlog(width,height),
+                    SizedBox(height: 10),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 16.0),
+                      width: width,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                          const MaterialStatePropertyAll<Color>(
+                              Color(0xffFF7011)),
+                          shape: MaterialStateProperty.all<
+                              RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                        ],
+                        ),
+                        onPressed: () {},
+                        child: const Text(
+                          'Читать все',
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 14),
+                        ),
                       ),
                     ),
                     SizedBox(height: 20),
                     catalogItem(),
-                    SizedBox(height: 40),
+                    SizedBox(height: 10),
                   ],
                 ),
               ),
@@ -297,10 +284,10 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget carouselBlog() {
+  Widget carouselBlog(width, height) {
     return Container(
-      width: 330,
-      height: 144,
+      width: 292 ,
+      height: height/6,
       child: CarouselSlider(
         items: [1, 2, 3].map((e) {
           return Container(
@@ -314,21 +301,19 @@ class _HomePageState extends State<HomePage>
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Expanded(
-                    child: Text(
-                  'Топ-20 лучших недорогих планшетов на сегодняшний день',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600),
-                )),
-              ),
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                'Топ-20 лучших недорогих планшетов на сегодняшний день',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600),
+              )),
             ),
           );
         }).toList(),
         options: CarouselOptions(
-          height: 300,
+          height: height/2,
           aspectRatio: 16 / 9,
           viewportFraction: 0.8,
           initialPage: 0,
@@ -533,25 +518,21 @@ class _HomePageState extends State<HomePage>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(
-                        child: Text(
-                          Orders.listProducts[index].title.toString(),
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xffFF7011)),
-                        ),
+                      Text(
+                        Orders.listProducts[index].title.toString(),
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xffFF7011)),
                       ),
                       SvgPicture.asset(
                         'assets/images/tick_square.svg',
                       ),
                     ],
                   ),
-                  Expanded(
-                    child: Text(
-                      Orders.listProducts[index].order_number.toString(),
-                      style: TextStyle(fontSize: 14, color: Color(0xff7B7B7B)),
-                    ),
+                  Text(
+                    Orders.listProducts[index].order_number.toString(),
+                    style: TextStyle(fontSize: 14, color: Color(0xff7B7B7B)),
                   ),
                   SizedBox(
                     height: 5,
@@ -566,16 +547,16 @@ class _HomePageState extends State<HomePage>
                   SizedBox(
                     height: 7,
                   ),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStatePropertyAll<Color>(Color(0xffFF7011)),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)))),
-                    onPressed: () {},
-                    child: Expanded(
+                  Flexible(
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll<Color>(Color(0xffFF7011)),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8)))),
+                      onPressed: () {},
                       child: Text(
                         'Забрать заказ',
                         style: TextStyle(color: Colors.white, fontSize: 14),
@@ -590,8 +571,8 @@ class _HomePageState extends State<HomePage>
         Positioned(
           bottom: 4,
           right: 3,
-          height: 109,
-          width: 109,
+          height: 90,
+          width: 90,
           child: SvgPicture.asset(
             Orders.listProducts[index].img_url.toString(),
           ),
@@ -616,8 +597,8 @@ class _HomePageState extends State<HomePage>
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   color: Colors.white),
-              height: 120,
-              width: 368,
+              height:120,
+              width: 360,
               child: Padding(
                 padding: EdgeInsets.all(10.0),
                 child: Column(
@@ -642,8 +623,8 @@ class _HomePageState extends State<HomePage>
                       height: 6,
                     ),
                     Container(
-                      width: 150,
-                      height: 30,
+                      width: 180,
+                      height: 28,
                       child: ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor: MaterialStatePropertyAll<Color>(
@@ -678,3 +659,4 @@ class _HomePageState extends State<HomePage>
     );
   }
 }
+
